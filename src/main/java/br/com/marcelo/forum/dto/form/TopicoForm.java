@@ -4,8 +4,8 @@ import javax.validation.constraints.NotBlank;
 
 import com.sun.istack.NotNull;
 
-import br.com.marcelo.forum.modelo.Curso;
-import br.com.marcelo.forum.modelo.Topico;
+import br.com.marcelo.forum.modelo.entity.Curso;
+import br.com.marcelo.forum.modelo.entity.Topico;
 import br.com.marcelo.forum.repository.CursoRepository;
 
 public class TopicoForm {
