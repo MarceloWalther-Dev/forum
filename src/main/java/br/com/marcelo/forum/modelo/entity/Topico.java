@@ -1,4 +1,4 @@
-package br.com.marcelo.forum.modelo;
+package br.com.marcelo.forum.modelo.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

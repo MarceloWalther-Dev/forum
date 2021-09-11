@@ -2,7 +2,7 @@ package br.com.marcelo.forum.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.marcelo.forum.modelo.Curso;
+import br.com.marcelo.forum.modelo.entity.Curso;
 
 public interface CursoRepository extends JpaRepository<Curso, Long> {
 	

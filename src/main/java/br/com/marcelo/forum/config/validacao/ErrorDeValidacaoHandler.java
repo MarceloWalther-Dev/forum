@@ -13,28 +13,37 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import br.com.marcelo.forum.config.validacao.errorDto.ErrorDeFormularioDto;
+import br.com.marcelo.forum.config.validacao.errorDto.ErrorDto;
+import br.com.marcelo.forum.modelo.exception.EntidadeNaoEncontradaException;
 
 @RestControllerAdvice
 public class ErrorDeValidacaoHandler {
 	
 	@Autowired
 	private MessageSource messageSource;
- 
+
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public List<ErrorDeFormularioDto> handle(MethodArgumentNotValidException exception) {
+	public List<ErrorDto> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
 		
-		List<ErrorDeFormularioDto> dto = new ArrayList<ErrorDeFormularioDto>();
+		List<ErrorDto> dto = new ArrayList<ErrorDto>();
 		
 		List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
 		fieldErrors.forEach(e ->{
 			String message = messageSource.getMessage(e, LocaleContextHolder.getLocale());
-			ErrorDeFormularioDto error = new ErrorDeFormularioDto(e.getField(), message);
+			ErrorDto error = new ErrorDto(e.getField(), message);
 			dto.add(error);
 		});
 		
 		return dto;
+	}
+	
+	@ResponseStatus(code = HttpStatus.NOT_FOUND)
+	@ExceptionHandler(EntidadeNaoEncontradaException.class)
+	public ErrorDto handleEntidadeNaoEncontrada(EntidadeNaoEncontradaException exception) {
+
+		ErrorDto errorDto = new ErrorDto(exception.getMsg());
+		return errorDto;
 	}
 	
 }

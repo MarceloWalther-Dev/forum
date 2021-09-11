@@ -6,7 +6,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import br.com.marcelo.forum.modelo.Topico;
+import br.com.marcelo.forum.modelo.entity.Topico;
 
 public class TopicoDto {
 	
